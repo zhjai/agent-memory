@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" width="1200" height="280" role="img" aria-label="agent-memory — governance-layer memory for AI agents, a permission-separated trust boundary, not retrieval">
+  <rect width="1200" height="280" fill="#0d1117"/>
+  <line x1="0" y1="0" x2="1200" y2="0" stroke="#21262d" stroke-width="1.5"/>
+  <line x1="0" y1="279" x2="1200" y2="279" stroke="#21262d" stroke-width="1.5"/>
+
+  <!-- Left: title -->
+  <text x="48" y="104" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="46" font-weight="800" fill="#f0f6fc" letter-spacing="-1">agent-memory</text>
+  <text x="50" y="140" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="600" fill="#58a6ff">Governance-layer memory for AI agents.</text>
+  <text x="50" y="166" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#8b949e">A permission-separated trust boundary — the agent carries rules,</text>
+  <text x="50" y="186" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#8b949e">state, and lessons but can't rewrite its own authority. Not retrieval.</text>
+  <g font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11.5">
+    <rect x="50" y="212" width="128" height="24" rx="12" fill="#161b22" stroke="#30363d"/><text x="114" y="228" text-anchor="middle" fill="#8b949e">read-only control</text>
+    <rect x="186" y="212" width="116" height="24" rx="12" fill="#161b22" stroke="#30363d"/><text x="244" y="228" text-anchor="middle" fill="#8b949e">no vector/graph</text>
+    <rect x="310" y="212" width="96" height="24" rx="12" fill="#161b22" stroke="#30363d"/><text x="358" y="228" text-anchor="middle" fill="#8b949e">standalone</text>
+  </g>
+
+  <line x1="470" y1="40" x2="470" y2="240" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Right: three permission-separated layers -->
+  <!-- control (read-only) -->
+  <rect x="520" y="66" width="620" height="48" rx="8" fill="#0f2417" stroke="#238636" stroke-width="1.5"/>
+  <text x="540" y="88" font-family="-apple-system,sans-serif" font-size="14" font-weight="700" fill="#3fb950">🔒 control/</text>
+  <text x="540" y="105" font-family="ui-monospace,Consolas,monospace" font-size="10.5" fill="#56d364">read-only · rules + approved lessons · human/CI only</text>
+  <text x="1120" y="95" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="10" fill="#2ea043">authority</text>
+
+  <!-- state (writable) -->
+  <rect x="520" y="122" width="620" height="48" rx="8" fill="#161b22" stroke="#388bfd" stroke-width="1.5"/>
+  <text x="540" y="144" font-family="-apple-system,sans-serif" font-size="14" font-weight="700" fill="#58a6ff">✍️ state/</text>
+  <text x="540" y="161" font-family="ui-monospace,Consolas,monospace" font-size="10.5" fill="#79c0ff">worker-writable · run_state + decisions · belief, not truth</text>
+  <text x="1120" y="151" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="10" fill="#388bfd">scratchpad</text>
+
+  <!-- lessons -->
+  <rect x="520" y="178" width="620" height="48" rx="8" fill="#1a1233" stroke="#a371f7" stroke-width="1.5"/>
+  <text x="540" y="200" font-family="-apple-system,sans-serif" font-size="14" font-weight="700" fill="#d2a8ff">lessons</text>
+  <text x="540" y="217" font-family="ui-monospace,Consolas,monospace" font-size="10.5" fill="#d2a8ff">approved (control) + candidate (pending) · worker proposes, never self-approves</text>
+
+  <text x="830" y="252" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="11" fill="#484f58">permission-separated · Claude Code · Codex · any agent</text>
+</svg>

@@ -1,6 +1,22 @@
 # agent-memory
 
-> **Governance-layer memory for AI agents** — three permission-separated layers so an agent can carry rules, state, and lessons across tasks **without being able to rewrite its own authority**. Not a retrieval engine; a trust boundary. Usable standalone in **any** task.
+<p align="center">
+  <img src="assets/banner.svg" alt="agent-memory — governance-layer memory for AI agents, a permission-separated trust boundary, not retrieval" width="100%">
+</p>
+
+<p align="center">
+  <strong>English</strong> · <a href="README.zh.md">中文</a>
+</p>
+
+<p align="center">
+  <img alt="skill" src="https://img.shields.io/badge/agent--skill-agent--memory-1f6feb">
+  <img alt="version" src="https://img.shields.io/badge/version-0.1.0-informational">
+  <img alt="works with" src="https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20any%20agent-444">
+  <img alt="no backend" src="https://img.shields.io/badge/no%20vector%2Fgraph-files%20only-2ea043">
+  <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-yellow"></a>
+</p>
+
+> **Governance-layer memory for AI agents** — three permission-separated layers so an agent can carry rules, state, and lessons across tasks **without being able to rewrite its own authority**. Not a retrieval engine; a trust boundary. Usable standalone in **any** task, on **any** agent — Claude Code, Codex, and others.
 
 Most agent-memory products (Mem0, Zep, Letta, LangMem) optimize **retrieval quality** — vector/graph/temporal recall — and assume the agent is cooperative. `agent-memory` solves a different, usually-ignored problem: **a goal-driven agent will quietly downgrade or rewrite "memory" that gets in the way of declaring a task done.** Its core is **who can write what**, not how to embed it.
 
@@ -60,12 +76,14 @@ We deliberately ship **no vector/graph backend** (Mem0's documented weakness: mu
 
 ## Pairs with agent-completion-gate
 
-For **long / high-stakes** tasks, add [`agent-completion-gate`](https://github.com/zhjai/agent-completion-gate) — a fail-closed completion gate + four-state machine that reads this kit's read-only `control/` to decide completion. **agent-memory is the base and stands alone; that kit is the optional enforcement layer on top.**
+For **long / high-stakes** tasks, add [`agent-completion-gate`](https://github.com/zhjai/agent-completion-gate) — a fail-closed completion gate + four-state machine that reads this kit's read-only `control/` (rules + approved lessons) as the policy it must honor, while bundling its own protected check spec. **agent-memory is the base and stands alone; that kit is the optional enforcement layer on top.**
 
 ## Install
 
 ```bash
-npx skills add zhjai/agent-memory -g -a claude-code
+npx skills add zhjai/agent-memory -g -a claude-code   # Claude Code
+npx skills add zhjai/agent-memory -g -a codex          # Codex
+# … or any other Agent-Skills host — it's plain files + a permission split, no vendor lock-in
 ```
 
 ## Status
