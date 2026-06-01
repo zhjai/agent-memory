@@ -1,0 +1,13 @@
+# approved_lessons/index.yaml — summary-first index of REVIEWED, promoted lessons.
+# Empty at init. `lesson-promote` writes proposals to state/.../candidate_lessons.md;
+# a human/CI reviews and adds approved entries here (the worker cannot self-approve).
+# resume-context reads this index and loads full lesson files only as needed.
+
+lessons: []
+
+# Example entry (added by review, not by the worker):
+#   - id: swanlab-usability
+#     summary: "user-visible artifacts (case display, run naming, readable curves) are completion criteria, not extras"
+#     file: swanlab-usability.md
+#     promoted_from: candidate
+#     date: "2026-06-01"
