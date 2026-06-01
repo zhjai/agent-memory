@@ -1,0 +1,27 @@
+# run_state.yaml — task checkpoint (WORKING MEMORY, not a source of truth)
+# Records what the agent believes it did. The gate verifies real artifacts; it does NOT trust this file.
+# One per task: state/tasks/<task_id>/run_state.yaml
+
+task_id: ""
+title: ""
+status: in_progress            # in_progress | candidate_complete | blocked | complete
+                               # worker may only advance to candidate_complete or blocked;
+                               # only an external verifier writes `complete`.
+
+# Pulled from control/ at resume (resume-context skill):
+active_constraints: []         # rules + relevant approved lessons in force this task
+
+# What this task is producing:
+artifacts: []                  # paths to real outputs (the gate inspects these directly)
+
+# Decisions / config choices that suppress or change user-visible output (MUST be explicit):
+suppressed_outputs: []         # e.g. {setting: max_case_examples, value: 0, reason: "..."}
+
+# Surfaces touched this task (used by completion-audit to find missing checks):
+touched_surfaces: []
+
+# Open items that block completion until resolved:
+review_queue_ref: "review_queue.yaml"
+
+updated_by: "worker-agent"     # provenance; worker writes this file
+# NOTE: do not record verdicts here as if final — the gate decides completion from real artifacts.
