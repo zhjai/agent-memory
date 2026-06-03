@@ -9,13 +9,15 @@
 </p>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-0.2.0-informational">
+  <img alt="version" src="https://img.shields.io/badge/version-0.3.0-informational">
   <img alt="works with" src="https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20any%20agent-444">
   <img alt="no backend" src="https://img.shields.io/badge/no%20vector%2Fgraph-files%20only-2ea043">
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
 > **给 AI 编程 agent 用的受控记忆。** 在长任务里记录用户的纠正、任务约束和跑偏教训——但不让 worker 把自己的笔记升级成项目权威。
+>
+> *项目往后要带着走的、经过评审的纠正、约束与教训——不是教程，也不是聊天记录。*
 
 AI 编程 agent 本来就有记忆。这工具盯的是一个更窄的失败：**任务进行到一半，你纠正了 agent、或补充了一条要求——结果这条要么转头就被忘了，要么没经任何评审就悄悄变成了往后的"权威"。**
 
@@ -36,6 +38,18 @@ AI 编程 agent 本来就有记忆。这工具盯的是一个更窄的失败：*
 - **agent-lessonbook**：决定*哪些*记下来的纠正和 lesson 有资格影响未来行为——先评审，再授权。
 
 > 大多数 memory 工具回答的是*"怎么存、怎么搜上下文?"*；`agent-lessonbook` 回答的是*"哪些记忆有资格影响未来 agent 行为?"*
+
+## 它记什么（以及不记什么）
+
+它只记**有证据支撑**、该带着走、且不该让 worker 自己说了算的东西——五类：
+
+1. **用户纠正 / 验收偏好** —— "其实图表标题里得带上 run name"。
+2. **跑偏根因** —— *为什么*走错了，好让下一轮别再犯。
+3. **negative constraint** —— 从一次错误里学到的"以后绝不做 X"。
+4. **被失败证明的 repo 坑** —— "跑测试 A 不带环境 B，会给你假的安全感"。
+5. **影响权威的架构约束** —— "approved lessons 住在 `control/`，worker 不能往那写"。
+
+它刻意**不**管这些：怎么跑测试 / 怎么验证（→ README、Makefile、CI）、项目惯例与环境配置（→ `CLAUDE.md` / `AGENTS.md` / lockfile）、任务状态与待决问题（→ `run_state.yaml`，不需评审）、你个人的输出风格（→ 内置 agent 记忆）。把日志压到高信号、值得评审的证据上，正是它的意义——一个什么都记的噪音日志会把它毁掉。
 
 ## 权限模型（谁能写什么）
 
@@ -89,4 +103,4 @@ npx skills add zhjai/agent-lessonbook -g -a claude-code   # 也可 -a codex、cu
 
 ## 状态
 
-`v0.2.0` 预览版。MIT。可移植、agent 无关、基于文件、可独立使用。（由 `agent-memory` 改名而来。）
+`v0.3.0` 预览版。MIT。可移植、agent 无关、基于文件、可独立使用。（由 `agent-memory` 改名而来。）

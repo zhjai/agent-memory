@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0
+
+- **Defined the capture scope deliberately (a tight top-5), and held the line against scope creep.** `agent-lessonbook` records only evidence-backed observations that should carry forward *and* that the worker shouldn't self-canonize: (1) user corrections / acceptance prefs, (2) drift root-causes, (3) correction-backed negative constraints, (4) repo pitfalls proven by failure, (5) authority-relevant architecture constraints. Everything else is explicitly **delegated** elsewhere (test/verify recipes → README/Makefile/CI; conventions/env → CLAUDE.md/AGENTS.md/lockfiles; task status/open questions → `run_state.yaml`; personal output style → built-in memory). The edge is *review-before-authority on high-signal evidence*, not "remember everything".
+- `correction-capture` broadened from corrections/drift to the 5 typed entries (`correction` / `drift` / `negative_constraint` / `pitfall` / `architecture_constraint`), with a "what NOT to capture" guardrail and a required-evidence rule for pitfalls/constraints. No new journal files, no new skill — types collapse into `correction_journal.md`.
+- README: added the "What it captures (and what it doesn't)" section and the tagline "*reviewed corrections, constraints, and lessons the project carries forward — not tutorials*". (Name `agent-lessonbook` kept — a second rename in days wasn't justified; the slight under-claim is handled by copy.)
+
 ## v0.2.0
 
 - **Renamed `agent-memory` → `agent-lessonbook`** and repositioned. The differentiator is **review-before-authority** + **correction/drift capture**, not retrieval — it doesn't compete with Mem0/Zep/Letta/LangMem or built-in agent memory; it sits on top as the review boundary. README is problem-first ("you correct the agent mid-task and it forgets / silently self-authorizes"), with the honest caveat that it captures drift when something *exposes* it and does not make the agent reliably notice its own drift.

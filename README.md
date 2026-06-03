@@ -9,13 +9,15 @@
 </p>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-0.2.0-informational">
+  <img alt="version" src="https://img.shields.io/badge/version-0.3.0-informational">
   <img alt="works with" src="https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20any%20agent-444">
   <img alt="no backend" src="https://img.shields.io/badge/no%20vector%2Fgraph-files%20only-2ea043">
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
 > **Reviewed memory for AI coding agents.** Capture user corrections, task constraints, and drift lessons during a long task — without letting the worker promote its own notes into project authority.
+>
+> *Reviewed corrections, constraints, and lessons the project carries forward — not tutorials, not a chat log.*
 
 AI coding agents already have memory. The failure this targets is narrower: **mid-task, you correct the agent or clarify a requirement — and that lesson either evaporates, or silently becomes future "authority" with no review.**
 
@@ -36,6 +38,18 @@ You don't replace your existing memory — you add a review boundary on top of i
 - **agent-lessonbook**: decides *which* recorded corrections and lessons are allowed to influence future behavior — review before authority.
 
 > Most memory tools answer *"how do we store and retrieve context?"*. `agent-lessonbook` answers *"which memories are allowed to influence future agent behavior?"*
+
+## What it captures (and what it doesn't)
+
+It records only **evidence-backed** things that should carry forward *and* that the worker shouldn't get to canonize on its own — five types:
+
+1. **User corrections / acceptance prefs** — "actually, chart titles must include the run name".
+2. **Drift root-causes** — *why* a wrong turn happened, so the next run avoids it.
+3. **Negative constraints** — a "never do X again" learned from a mistake.
+4. **Repo pitfalls proven by failure** — "running test A without env B gives false confidence".
+5. **Authority-relevant architecture constraints** — "approved lessons live in `control/`; workers can't write there".
+
+It deliberately does **not** own: how to run tests / validate the repo (→ README, Makefile, CI), project conventions and env setup (→ `CLAUDE.md` / `AGENTS.md` / lockfiles), task status and open questions (→ `run_state.yaml`, no review needed), or your personal output style (→ built-in agent memory). Keeping the journal to high-signal, review-worthy evidence is the point — a noisy "record everything" log defeats it.
 
 ## The permission model (who can write what)
 
@@ -89,4 +103,4 @@ It's just files — `git diff` your `state/` and `control/` like any other chang
 
 ## Status
 
-`v0.2.0` preview. MIT. Portable, agent-agnostic, file-based, standalone. (Renamed from `agent-memory`.)
+`v0.3.0` preview. MIT. Portable, agent-agnostic, file-based, standalone. (Renamed from `agent-memory`.)

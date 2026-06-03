@@ -3,7 +3,7 @@ name: lesson-propose
 description: Use at task wrap-up, after a mistake, or on a postmortem to turn the correction journal and observations into review PROPOSALS — classify each candidate lesson by target tier (working-only / approved-lesson / policy / gate-candidate) and write a proposal note, without self-approving. Use when wrapping up, after something went wrong, or when a correction should persist. Do not grant a lesson authority — the worker proposes, a human promotes.
 license: MIT
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
   author: zhjai
   tags: "lessonbook, lessons, postmortem, proposal, review"
   related_skills: "correction-capture, resume-context"

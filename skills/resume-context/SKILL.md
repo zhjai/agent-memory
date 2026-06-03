@@ -3,7 +3,7 @@ name: resume-context
 description: Use at the start or resume of any task (especially long or multi-session tasks) to load the lessonbook before acting — read the read-only control rules and approved lessons plus the task's working state, and surface the active constraints for this run. Use when starting/resuming work, picking up a long task, or when continuity across sessions matters. Do not use for one-shot factual lookups with no prior state.
 license: MIT
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
   author: zhjai
   tags: "lessonbook, resume, context, active-constraints, long-task, continuity"
   related_skills: "correction-capture, lesson-propose"
