@@ -1,0 +1,17 @@
+# Equivalent of hooks.json, inline in ~/.codex/config.toml. Fix the path to lessonbook_hook.py.
+# Trigger-only; see integrations/README.md for the trust model + the Codex PostToolUse caveat.
+
+[[hooks.UserPromptSubmit]]
+[[hooks.UserPromptSubmit.hooks]]
+type = "command"
+command = 'python3 <lessonbook>/integrations/hooks/lessonbook_hook.py'
+
+[[hooks.PostToolUse]]
+[[hooks.PostToolUse.hooks]]
+type = "command"
+command = 'python3 <lessonbook>/integrations/hooks/lessonbook_hook.py'
+
+[[hooks.PreCompact]]
+[[hooks.PreCompact.hooks]]
+type = "command"
+command = 'python3 <lessonbook>/integrations/hooks/lessonbook_hook.py'

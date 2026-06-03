@@ -3,7 +3,7 @@ name: correction-capture
 description: Use the moment evidence appears that should influence FUTURE execution and would be wrong for the worker to treat as authority on its own — a user correction/clarification ("actually…", "you skipped X again"), exposed drift (a check fails, a miss is pointed out), a proven repo pitfall, a "never do X" constraint, or an authority-relevant architecture constraint. Record it to the task's correction journal with a type, and add active ones to run_state constraints. Do not use for routine progress, or for things that belong in the repo (test commands, conventions, env) or built-in memory. Captures evidence when something exposes it; it does not make the agent notice drift on its own.
 license: MIT
 metadata:
-  version: "0.3.0"
+  version: "0.3.1"
   author: zhjai
   tags: "lessonbook, corrections, drift, constraints, pitfalls, journal"
   related_skills: "resume-context, lesson-propose"
@@ -35,6 +35,11 @@ gains authority.
 - Your personal output preferences (language, patch-vs-prose) → built-in agent memory, not this repo.
 
 ## Procedure
+0. **Triage the inbox first** (if you use the optional hooks). A `PreCompact` hook may have left
+   `status: UNREVIEWED` placeholders in `state/lessonbook/inbox.md` (`$LESSONBOOK_INBOX`). Review
+   each: if it points at a real correction/drift, turn it into a typed journal entry below and
+   clear it; if it's noise, drop it. The inbox is a machine-written pointer, never authority —
+   don't let it rot.
 1. Append an entry to `state/tasks/<task_id>/correction_journal.md`:
    ```md
    ## <date> — <type>            # correction | drift | negative_constraint | pitfall | architecture_constraint

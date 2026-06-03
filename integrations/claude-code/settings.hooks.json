@@ -1,0 +1,14 @@
+{
+  "//": "Example Claude Code hooks for agent-lessonbook. Merge into .claude/settings.json and fix the path to lessonbook_hook.py. TRIGGER-ONLY: it nudges the model to consider correction-capture; PreCompact also writes an UNREVIEWED pending to the inbox. It never writes a final lesson and never promotes. Set LESSONBOOK_INBOX if you don't use state/lessonbook/inbox.md.",
+  "hooks": {
+    "UserPromptSubmit": [
+      { "matcher": "", "hooks": [ { "type": "command", "command": "python3 <lessonbook>/integrations/hooks/lessonbook_hook.py" } ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "", "hooks": [ { "type": "command", "command": "python3 <lessonbook>/integrations/hooks/lessonbook_hook.py" } ] }
+    ],
+    "PreCompact": [
+      { "matcher": "", "hooks": [ { "type": "command", "command": "python3 <lessonbook>/integrations/hooks/lessonbook_hook.py" } ] }
+    ]
+  }
+}

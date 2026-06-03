@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.3.1
+
+- **Repositioned vs built-in agent memory** (verified June 2026: Claude Code auto memory + Codex memories both auto-record engineering details — but are *recall* layers, not authority; vendors' own docs put "rules that must always apply" in CLAUDE.md/AGENTS.md). README now says it plainly — lessonbook doesn't compete on recall (it's weaker there); it's the git-reviewed gate that decides which lessons become project authority. Tagline: "built-in auto memory helps an agent remember what it *thinks* it learned; lessonbook decides which become authority for every agent on the repo."
+- **Triggers** (`integrations/`) so capture isn't starved (it's a skill the agent must invoke), without becoming "auto-record everything":
+  - `integrations/hooks/lessonbook_hook.py` — a thin, **trigger-only** hook for **both Claude Code and Codex**: `UserPromptSubmit` nudges on a likely correction, `PostToolUse` nudges on a failed tool/check, `PreCompact` writes an **UNREVIEWED** pending to the inbox so a correction isn't lost to compaction. It never writes a final lesson, never promotes, and exits 0 on bad input.
+  - **One** shared hook script (output validated against the real host schemas — Codex `rust-v0.135.0` + Claude Code docs — both use `{"hookSpecificOutput":{"hookEventName","additionalContext"}}`); **two** host-specific config files (`integrations/claude-code/settings.hooks.json` vs `integrations/codex/hooks.json` + `config.toml.example`). Honest caveats: Codex `PostToolUse` exposes no numeric exit code (failure→drift is best-effort, and skips `0 errors`/`success`), and `PreCompact` can't inject context on either host (it only writes the inbox).
+  - Security: the inbox path is forced out of `control/` and away from journals/candidate files (a mis-set `LESSONBOOK_INBOX` can't pollute authority), and `transcript_path` is sanitized so it can't forge headings/actions in the inbox.
+  - Host-agnostic soft nudge `templates/lessonbook-nudge.md` (a CLAUDE.md/AGENTS.md line — the floor that works on every host).
+  - `correction-capture` / `resume-context` now triage the hook-written inbox, so unreviewed placeholders don't rot.
+- Discipline held: triggers only remind/flag; the model still judges the 5 types and a human still promotes. No Stop blocking, no classifier, no auto-record.
+
 ## v0.3.0
 
 - **Defined the capture scope deliberately (a tight top-5), and held the line against scope creep.** `agent-lessonbook` records only evidence-backed observations that should carry forward *and* that the worker shouldn't self-canonize: (1) user corrections / acceptance prefs, (2) drift root-causes, (3) correction-backed negative constraints, (4) repo pitfalls proven by failure, (5) authority-relevant architecture constraints. Everything else is explicitly **delegated** elsewhere (test/verify recipes → README/Makefile/CI; conventions/env → CLAUDE.md/AGENTS.md/lockfiles; task status/open questions → `run_state.yaml`; personal output style → built-in memory). The edge is *review-before-authority on high-signal evidence*, not "remember everything".

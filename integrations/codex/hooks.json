@@ -1,0 +1,14 @@
+{
+  "//": "Example Codex hooks for agent-lessonbook (also expressible as [hooks] tables in ~/.codex/config.toml — see config.toml.example). Fix the path to lessonbook_hook.py. TRIGGER-ONLY, same discipline as the Claude version. NOTE: Codex PostToolUse exposes tool_response but not a numeric exit code, so the failure->drift nudge is best-effort on Codex (it matches error/traceback text). UserPromptSubmit + PreCompact behave the same as on Claude.",
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "python3 <lessonbook>/integrations/hooks/lessonbook_hook.py" } ] }
+    ],
+    "PostToolUse": [
+      { "hooks": [ { "type": "command", "command": "python3 <lessonbook>/integrations/hooks/lessonbook_hook.py" } ] }
+    ],
+    "PreCompact": [
+      { "hooks": [ { "type": "command", "command": "python3 <lessonbook>/integrations/hooks/lessonbook_hook.py" } ] }
+    ]
+  }
+}

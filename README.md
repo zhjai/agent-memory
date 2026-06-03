@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-0.3.0-informational">
+  <img alt="version" src="https://img.shields.io/badge/version-0.3.1-informational">
   <img alt="works with" src="https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20any%20agent-444">
   <img alt="no backend" src="https://img.shields.io/badge/no%20vector%2Fgraph-files%20only-2ea043">
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-yellow"></a>
@@ -38,6 +38,12 @@ You don't replace your existing memory — you add a review boundary on top of i
 - **agent-lessonbook**: decides *which* recorded corrections and lessons are allowed to influence future behavior — review before authority.
 
 > Most memory tools answer *"how do we store and retrieve context?"*. `agent-lessonbook` answers *"which memories are allowed to influence future agent behavior?"*
+
+### vs your agent's built-in memory
+
+Claude Code (auto memory, on by default) and Codex (memories) **already auto-record engineering details** — build commands, architecture notes, style. `agent-lessonbook` doesn't compete with that, and on pure recall it's weaker (capture is a skill the agent invokes, not background summarization). What it adds is what both vendors deliberately leave out: **their own docs say auto memory is a *recall layer*, not authority** — "rules that must always apply" belong in CLAUDE.md / AGENTS.md, maintained by a human. `agent-lessonbook` is the structured, git-reviewed workflow for exactly that promotion.
+
+> Built-in auto memory helps an agent remember what it *thinks* it learned. `agent-lessonbook` is the git-reviewed gate that decides which lessons become **project authority — for every agent on the repo.**
 
 ## What it captures (and what it doesn't)
 
@@ -81,6 +87,8 @@ Three skills, all worker-side process — none of them can grant authority:
 
 Promotion (candidate → `approved_lessons/` or `rules.md`) is deliberately **not a skill** — it's a human review step in git, so the worker can never reach authority through tool use.
 
+Capture is a skill the agent *invokes*, so it can be missed. To fire it reliably, add the host-agnostic nudge (one line in `CLAUDE.md` / `AGENTS.md`) or optional Claude Code / Codex hooks — they only *trigger* capture, never write or promote. See [`integrations/`](integrations/).
+
 ## Quick start
 
 ```bash
@@ -103,4 +111,4 @@ It's just files — `git diff` your `state/` and `control/` like any other chang
 
 ## Status
 
-`v0.3.0` preview. MIT. Portable, agent-agnostic, file-based, standalone. (Renamed from `agent-memory`.)
+`v0.3.1` preview. MIT. Portable, agent-agnostic, file-based, standalone. (Renamed from `agent-memory`.)

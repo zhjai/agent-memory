@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-0.3.0-informational">
+  <img alt="version" src="https://img.shields.io/badge/version-0.3.1-informational">
   <img alt="works with" src="https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20any%20agent-444">
   <img alt="no backend" src="https://img.shields.io/badge/no%20vector%2Fgraph-files%20only-2ea043">
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-yellow"></a>
@@ -38,6 +38,12 @@ AI 编程 agent 本来就有记忆。这工具盯的是一个更窄的失败：*
 - **agent-lessonbook**：决定*哪些*记下来的纠正和 lesson 有资格影响未来行为——先评审，再授权。
 
 > 大多数 memory 工具回答的是*"怎么存、怎么搜上下文?"*；`agent-lessonbook` 回答的是*"哪些记忆有资格影响未来 agent 行为?"*
+
+### 对比你 agent 自带的记忆
+
+Claude Code（auto memory，默认开）和 Codex（memories）**早就在自动记工程细节了**——build 命令、架构笔记、风格。`agent-lessonbook` 不跟它们拼这个，单论"记忆/召回"它还更弱（捕获是 agent 主动调的 skill，不是后台自动总结）。它补的是两家**故意没做**的那一层：**它们自己的文档都说 auto memory 是"召回层"、不是权威**——"必须始终生效的规则"该放 CLAUDE.md / AGENTS.md、由人维护。`agent-lessonbook` 提供的正是把东西**提拔成规则**的那道结构化、可 git-review 的流程。
+
+> 内置 auto memory 帮 agent 记住它*以为*自己学到的；`agent-lessonbook` 是那道 git-review 的闸，决定哪些 lesson 能变成——**对 repo 上每个 agent 都生效的——项目权威。**
 
 ## 它记什么（以及不记什么）
 
@@ -81,6 +87,8 @@ AI 编程 agent 本来就有记忆。这工具盯的是一个更窄的失败：*
 
 提拔（候选 → `approved_lessons/` 或 `rules.md`）刻意**不做成 skill**——它是 git 里的一步人工评审，这样 worker 永远没法靠调工具够到权威。
 
+捕获是 agent 主动调的 skill，所以可能被漏。想让它**可靠触发**：加一行宿主无关的 nudge（写进 `CLAUDE.md` / `AGENTS.md`），或给 Claude Code / Codex 配可选的 hook——它们只**触发**捕获，从不写、也不提拔。见 [`integrations/`](integrations/)。
+
 ## 快速上手
 
 ```bash
@@ -103,4 +111,4 @@ npx skills add zhjai/agent-lessonbook -g -a claude-code   # 也可 -a codex、cu
 
 ## 状态
 
-`v0.3.0` 预览版。MIT。可移植、agent 无关、基于文件、可独立使用。（由 `agent-memory` 改名而来。）
+`v0.3.1` 预览版。MIT。可移植、agent 无关、基于文件、可独立使用。（由 `agent-memory` 改名而来。）
